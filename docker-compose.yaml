@@ -1,0 +1,17 @@
+---
+x-service-conf: &service-conf
+  command: sh -c 'cp -r /src /app && cd /app && ./run.sh'
+  volumes:
+    - ./.:/src:ro
+  network_mode: none
+
+version: '3.7'
+services:
+  v1_62:
+    container_name: '1.62'
+    image: rust:1.62-alpine
+    << : *service-conf
+  v1_63:
+    container_name: '1.63'
+    image: rust:1.63-alpine
+    << : *service-conf
